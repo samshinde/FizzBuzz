@@ -10,10 +10,14 @@ pipeline {
 
   stages {
     stage('Checkout') {
-        echo "Checkout Completed...."
+        steps{
+            echo "Checkout Completed...."
+        }
     }
     stage('Build') {
-        echo "Build Completed"
+        steps{
+            echo "Build Completed"
+        }
     }
     stage('Test') {
       agent {
@@ -26,7 +30,9 @@ pipeline {
       }
     }
     stage('Deploy'){
-        echo "Deploy Completed"
+        steps{
+            echo "Deploy Completed"
+        }
     }  
   }
 }
