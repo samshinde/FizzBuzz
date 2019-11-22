@@ -20,8 +20,14 @@ pipeline {
             }
         }
         stage('Test') {
+            agent {
+                docker { 
+                    image 'maven:3-alpine' 
+                }
+            }
             steps {
                 sh 'mvn test'
+                sh 'cp -R ${WORKSPACE}@2/target ${WORKSPACE}'
             }
         }
         stage('Deploy'){
@@ -33,14 +39,7 @@ pipeline {
 
     post {  
         always {
-          junit "**/build/test-results/*.xml"
-          step([
-              $class           : 'JacocoPublisher',
-              execPattern      : 'build/jacoco/jacoco.exec',
-              classPattern     : 'build/classes/main',
-              sourcePattern    : 'src/main/java',
-              exclusionPattern : '**/*Test.class'
-          ])
+          jacoco()
         }
     }
 }
