@@ -33,15 +33,14 @@ pipeline {
 
     post {  
         always {
-              junit "**/build/test-results/*.xml"
-              step([
-                  $class           : 'JacocoPublisher',
-                  execPattern      : 'build/jacoco/jacoco.exec',
-                  classPattern     : 'build/classes/main',
-                  sourcePattern    : 'src/main/java',
-                  exclusionPattern : '**/*Test.class'
-              ])
-            }
+          junit "**/build/test-results/*.xml"
+          step([
+              $class           : 'JacocoPublisher',
+              execPattern      : 'build/jacoco/jacoco.exec',
+              classPattern     : 'build/classes/main',
+              sourcePattern    : 'src/main/java',
+              exclusionPattern : '**/*Test.class'
+          ])
         }
     }
 }
