@@ -20,14 +20,8 @@ pipeline {
             }
         }
         stage('Test') {
-            agent {
-                docker { 
-                    image 'maven:3-alpine' 
-                }
-            }
             steps {
                 sh 'mvn test'
-                sh 'cp -R ${WORKSPACE}@2/target ${WORKSPACE}'
             }
         }
         stage('Deploy'){
